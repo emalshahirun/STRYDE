@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart_provider.dart';
+import '../widgets/custom_bottom_nav_bar.dart';
+import 'home_screen.dart';
+import 'profile_screen.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -39,15 +42,35 @@ class CartScreen extends StatelessWidget {
       body: Consumer<CartProvider>(
         builder: (context, cart, child) {
           if (cart.itemCount == 0) {
-            return const Center(
+            return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.shopping_bag_outlined, size: 80, color: Colors.grey),
-                  SizedBox(height: 16),
-                  Text(
+                  Container(
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: cardColor,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: const Icon(Icons.shopping_bag_outlined, size: 80, color: Colors.grey),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
                     'Your cart is empty',
                     style: TextStyle(color: Colors.grey, fontSize: 18),
+                  ),
+                  const SizedBox(height: 8),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      );
+                    },
+                    child: const Text(
+                      'Continue shopping',
+                      style: TextStyle(color: primaryYellow, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -58,6 +81,45 @@ class CartScreen extends StatelessWidget {
 
           return Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: cardColor,
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: primaryYellow.withOpacity(0.16),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(Icons.shopping_bag_outlined, color: primaryYellow),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Ready to checkout',
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 16),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              '${cart.itemCount} item${cart.itemCount == 1 ? '' : 's'} in your bag',
+                              style: const TextStyle(color: Colors.grey, fontSize: 13),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Expanded(
                 child: ListView.builder(
                   padding: const EdgeInsets.all(16),
@@ -73,7 +135,6 @@ class CartScreen extends StatelessWidget {
                       ),
                       child: Row(
                         children: [
-                          // Product image
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
@@ -90,7 +151,6 @@ class CartScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 12),
-                          // Product info
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,13 +175,11 @@ class CartScreen extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                // Quantity controls
                                 Row(
                                   children: [
                                     _QuantityButton(
                                       icon: Icons.remove,
-                                      onPressed: () =>
-                                          cart.decreaseQuantity(cartItem.product.id),
+                                      onPressed: () => cart.decreaseQuantity(cartItem.product.id),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -136,15 +194,13 @@ class CartScreen extends StatelessWidget {
                                     ),
                                     _QuantityButton(
                                       icon: Icons.add,
-                                      onPressed: () =>
-                                          cart.addToCart(cartItem.product),
+                                      onPressed: () => cart.addToCart(cartItem.product),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
                           ),
-                          // Remove button
                           IconButton(
                             icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
                             onPressed: () => cart.removeItem(cartItem.product.id),
@@ -155,7 +211,6 @@ class CartScreen extends StatelessWidget {
                   },
                 ),
               ),
-              // Order summary
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: const BoxDecoration(
@@ -216,6 +271,22 @@ class CartScreen extends StatelessWidget {
               ),
             ],
           );
+        },
+      ),
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedIndex: 1,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
+            );
+          } else if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const ProfileScreen()),
+            );
+          }
         },
       ),
     );
