@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'screens/login_screen.dart';
 import 'providers/cart_provider.dart';
 import 'providers/theme_provider.dart';
-import 'screens/splash_screen.dart';
 
 void main() {
   runApp(
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const LoginScreen(),
     );
   }
 }
