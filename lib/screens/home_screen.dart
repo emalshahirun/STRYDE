@@ -185,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
                                   image: DecorationImage(
-                                    image: NetworkImage(product.imageUrl),
+                                    image: AssetImage(product.imageUrl),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
