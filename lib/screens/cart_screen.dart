@@ -94,7 +94,7 @@ class CartScreen extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: primaryYellow.withOpacity(0.16),
+                          color: primaryYellow.withValues(alpha: 0.16),
                           borderRadius: BorderRadius.circular(14),
                         ),
                         child: const Icon(Icons.shopping_bag_outlined, color: primaryYellow),
