@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/product_model.dart';
 import '../providers/cart_provider.dart';
+import '../widgets/custom_bottom_nav_bar.dart';
 import 'product_details_screen.dart';
 import 'cart_screen.dart';
 
@@ -258,6 +259,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedIndex: -1, // No selection for HomeScreen
+        onTap: (index) {
+          if (index == 1) {
+            // Navigate to Cart Screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CartScreen()),
+            );
+          } else if (index == 2) {
+            // Navigate to Profile Screen (not implemented)
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Profile screen not implemented yet!')),
+            );
+          }
+        },
+      )
     );
   }
 }
