@@ -240,12 +240,15 @@ class CartScreen extends StatelessWidget {
                       child: ElevatedButton(
                         onPressed: () {
                           cart.clearCart();
-                          Navigator.pop(context);
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Order placed successfully! 🎉'),
                               duration: Duration(seconds: 2),
                             ),
+                          );
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
