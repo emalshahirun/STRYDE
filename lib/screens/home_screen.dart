@@ -5,6 +5,7 @@ import '../providers/cart_provider.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 import 'product_details_screen.dart';
 import 'cart_screen.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -260,22 +261,27 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       bottomNavigationBar: CustomBottomNavBar(
-        selectedIndex: -1, // No selection for HomeScreen
-        onTap: (index) {
-          if (index == 1) {
-            // Navigate to Cart Screen
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const CartScreen()),
-            );
-          } else if (index == 2) {
-            // Navigate to Profile Screen (not implemented)
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Profile screen not implemented yet!')),
-            );
-          }
-        },
-      )
+  selectedIndex: 0,
+  onTap: (index) {
+    if (index == 0) return;
+
+    if (index == 1) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CartScreen(),
+        ),
+      );
+    } else if (index == 2) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const ProfileScreen(),
+        ),
+      );
+    }
+  },
+),
     );
   }
 }
