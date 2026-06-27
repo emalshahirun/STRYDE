@@ -1,12 +1,35 @@
-# e_com_app
+# STRYDE mini e-commerce store
+#Technical Stack Specifications
+Framework: Flutter SDK (Stable Channel)
 
-A new Flutter project.
+Language: Dart
 
-## Getting Started
+State Architecture: Provider Framework (ChangeNotifierProvider, MultiProvider, Consumer)
 
-This project is a starting point for a Flutter application.
+Styling Theme Config: Custom Dark Palette (0xFF121212 / 0xFF1A1A1A Accent Fill / Premium 0xFFFBB000 Contrast Brand Highlighting)
 
-A few resources to get you started if this is your first Flutter project:
+#Step-by-Step Installation & Run Configurations
+Follow these exact commands inside your terminal environment to initialize, compile, and run the system locally:
+
+1. Project Initialization & Clones
+Bash
+git clone <your-repository-github-url-link>
+cd e_com_app
+2. Dependency Resolution & Configuration Sync
+Fetch all package declarations specified in the dependency configuration layer:
+
+Bash
+flutter pub get
+3. Clear Compiling Caches (Highly Recommended)
+To prevent internal tracking conflicts from cached assets or variable changes across target platforms, run a fresh workspace clean:
+
+Bash
+flutter clean
+flutter pub get
+4. Direct App Execution
+Launch the application binary onto your active simulator, emulator, or tethered debugging handset:
+
+
 
 - [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
 - [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
